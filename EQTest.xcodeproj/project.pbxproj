@@ -13,7 +13,27 @@
 		5836465D2C2BFF44001148DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5836465B2C2BFF44001148DC /* Main.storyboard */; };
 		5836465F2C2BFF45001148DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5836465E2C2BFF45001148DC /* Assets.xcassets */; };
 		583646622C2BFF45001148DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 583646602C2BFF45001148DC /* LaunchScreen.storyboard */; };
+		5836466F2C2C0006001148DC /* NewEQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5836466E2C2C0006001148DC /* NewEQView.swift */; };
+		583646712C2C0036001148DC /* VerticalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583646702C2C0036001148DC /* VerticalSlider.swift */; };
+		583646732C2C0064001148DC /* VerticalSliderEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583646722C2C0064001148DC /* VerticalSliderEventHandler.swift */; };
+		58411BBF2C2D478F001D6D26 /* EQPresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58411BBE2C2D478F001D6D26 /* EQPresetView.swift */; };
+		584D29162C2CFC7A00856C0F /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 584D29152C2CFC7A00856C0F /* Then */; };
+		584D29182C2CFFC000856C0F /* EQSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584D29172C2CFFC000856C0F /* EQSliderView.swift */; };
+		585BF5BE2C2D104C008908F5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 585BF5BD2C2D104C008908F5 /* SnapKit */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		584D291A2C2D0EA100856C0F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		583646522C2BFF44001148DC /* EQTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EQTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +44,11 @@
 		5836465E2C2BFF45001148DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		583646612C2BFF45001148DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		583646632C2BFF45001148DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5836466E2C2C0006001148DC /* NewEQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEQView.swift; sourceTree = "<group>"; };
+		583646702C2C0036001148DC /* VerticalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSlider.swift; sourceTree = "<group>"; };
+		583646722C2C0064001148DC /* VerticalSliderEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSliderEventHandler.swift; sourceTree = "<group>"; };
+		58411BBE2C2D478F001D6D26 /* EQPresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EQPresetView.swift; sourceTree = "<group>"; };
+		584D29172C2CFFC000856C0F /* EQSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EQSliderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584D29162C2CFC7A00856C0F /* Then in Frameworks */,
+				585BF5BE2C2D104C008908F5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +69,7 @@
 			children = (
 				583646542C2BFF44001148DC /* EQTest */,
 				583646532C2BFF44001148DC /* Products */,
+				584D291B2C2D0EE300856C0F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,12 +87,24 @@
 				583646552C2BFF44001148DC /* AppDelegate.swift */,
 				583646572C2BFF44001148DC /* SceneDelegate.swift */,
 				583646592C2BFF44001148DC /* ViewController.swift */,
+				5836466E2C2C0006001148DC /* NewEQView.swift */,
+				584D29172C2CFFC000856C0F /* EQSliderView.swift */,
+				58411BBE2C2D478F001D6D26 /* EQPresetView.swift */,
 				5836465B2C2BFF44001148DC /* Main.storyboard */,
 				5836465E2C2BFF45001148DC /* Assets.xcassets */,
 				583646602C2BFF45001148DC /* LaunchScreen.storyboard */,
 				583646632C2BFF45001148DC /* Info.plist */,
+				583646702C2C0036001148DC /* VerticalSlider.swift */,
+				583646722C2C0064001148DC /* VerticalSliderEventHandler.swift */,
 			);
 			path = EQTest;
+			sourceTree = "<group>";
+		};
+		584D291B2C2D0EE300856C0F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,12 +117,17 @@
 				5836464E2C2BFF44001148DC /* Sources */,
 				5836464F2C2BFF44001148DC /* Frameworks */,
 				583646502C2BFF44001148DC /* Resources */,
+				584D291A2C2D0EA100856C0F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = EQTest;
+			packageProductDependencies = (
+				584D29152C2CFC7A00856C0F /* Then */,
+				585BF5BD2C2D104C008908F5 /* SnapKit */,
+			);
 			productName = EQTest;
 			productReference = 583646522C2BFF44001148DC /* EQTest.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +156,10 @@
 				Base,
 			);
 			mainGroup = 583646492C2BFF44001148DC;
+			packageReferences = (
+				584D29142C2CFC7A00856C0F /* XCRemoteSwiftPackageReference "Then" */,
+				585BF5BC2C2D104C008908F5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 583646532C2BFF44001148DC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				583646732C2C0064001148DC /* VerticalSliderEventHandler.swift in Sources */,
+				58411BBF2C2D478F001D6D26 /* EQPresetView.swift in Sources */,
 				5836465A2C2BFF44001148DC /* ViewController.swift in Sources */,
+				5836466F2C2C0006001148DC /* NewEQView.swift in Sources */,
+				583646712C2C0036001148DC /* VerticalSlider.swift in Sources */,
 				583646562C2BFF44001148DC /* AppDelegate.swift in Sources */,
 				583646582C2BFF44001148DC /* SceneDelegate.swift in Sources */,
+				584D29182C2CFFC000856C0F /* EQSliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +417,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		584D29142C2CFC7A00856C0F /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		585BF5BC2C2D104C008908F5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		584D29152C2CFC7A00856C0F /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 584D29142C2CFC7A00856C0F /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		585BF5BD2C2D104C008908F5 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 585BF5BC2C2D104C008908F5 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5836464A2C2BFF44001148DC /* Project object */;
 }
