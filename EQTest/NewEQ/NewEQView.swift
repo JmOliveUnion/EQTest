@@ -10,14 +10,14 @@ import UIKit
 import SnapKit
 import Then
 
-class NewEQView: UIView {
+class NewEQView: UIView, UIScrollViewDelegate {
     let screenSize: CGRect = UIScreen.main.bounds
-
+    
     let eqScrollView: UIScrollView = {
-      let scrollView = UIScrollView()
-      scrollView.backgroundColor = .systemBackground
-      scrollView.translatesAutoresizingMaskIntoConstraints = false
-      return scrollView
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .systemBackground
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
     }()
     
     private let eqContentView: UIView = {
@@ -43,14 +43,15 @@ class NewEQView: UIView {
     }
     
     lazy var topNaviBarView: UIView = {
-       let view = UIView()
-        view.addSubview(topLeftButton)
+        let view = UIView()
         view.addSubview(topTitle)
         view.addSubview(topRightXbutton)
-        
+        view.addSubview(topLeftButton)
+
         topLeftButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
+            $0.width.height.equalTo(20)
         }
         
         topTitle.snp.makeConstraints {
@@ -61,8 +62,8 @@ class NewEQView: UIView {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-20)
         }
-
-    return view
+        
+        return view
         
     }()
     
@@ -78,8 +79,8 @@ class NewEQView: UIView {
         $0.font = .boldSystemFont(ofSize: 20)
         $0.textAlignment = .left
         $0.sizeToFit()
-
-
+        
+        
     }
     
     let choiceImage = UIImageView().then {
@@ -89,7 +90,7 @@ class NewEQView: UIView {
             $0.height.width.equalTo(24)
         }
     }
-                           
+    
     lazy var choiceStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [choiceLabel, customSoundLabel, choiceImage])
         stack.spacing = 5
@@ -97,16 +98,25 @@ class NewEQView: UIView {
         stack.alignment = .leading
         return stack
     }()
-                           
+    
+    let selectButton = UIButton().then {
+        $0.backgroundColor = .clear
+    }
+    
     
     
     lazy var selectSoundView: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         view.addSubview(choiceStack)
+        view.addSubview(selectButton)
+        
         choiceStack.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
+        }
+        selectButton.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         view.layer.cornerRadius = 4
@@ -133,7 +143,7 @@ class NewEQView: UIView {
     }
     
     lazy var leftEarView: UIView = {
-       let view = UIView()
+        let view = UIView()
         let label = UILabel()
         
         label.text = "왼쪽"
@@ -167,7 +177,7 @@ class NewEQView: UIView {
     }
     
     lazy var rightEarView: UIView = {
-       let view = UIView()
+        let view = UIView()
         let label = UILabel()
         
         label.text = "오른쪽"
@@ -197,7 +207,7 @@ class NewEQView: UIView {
     }()
     
     lazy var chaingView: UIView = {
-       let view = UIView()
+        let view = UIView()
         let image = UIImageView()
         image.image = UIImage(named: "chain_active")
         image.contentMode = .scaleAspectFit
@@ -218,14 +228,14 @@ class NewEQView: UIView {
     }()
     
     lazy var topLeftRightButtons: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [leftEarView, chaingView, rightEarView])
+        let stack = UIStackView(arrangedSubviews: [leftEarView, chaingView, rightEarView])
         stack.distribution = .fillProportionally
         stack.spacing = 20
         return stack
     }()
     
     let totalSliderView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .lightGray
         
         return view
@@ -240,39 +250,39 @@ class NewEQView: UIView {
     let slider7 = EQSliderView(topLabel: "0", bottomLabel: "4k")
     let slider8 = EQSliderView(topLabel: "0", bottomLabel: "6k")
     let slider9 = EQSliderView(topLabel: "0", bottomLabel: "8k")
-
+    
     lazy var eqSliderStackView: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [slider1, slider2, slider3, slider4, slider5, slider6, slider7, slider8, slider9])
-//        stack.spacing = 7
+        let stack = UIStackView(arrangedSubviews: [slider1, slider2, slider3, slider4, slider5, slider6, slider7, slider8, slider9])
+        //        stack.spacing = 7
         stack.distribution = .fillEqually
         return stack
     }()
     
     let leftEQBackGroundView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .red
         
         return view
     }()
     
     let middleEQBackGroundView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .blue
         
         return view
     }()
     
     let rightEQBackGroundView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .green
         
         return view
     }()
-
+    
     // MARK: - Bottom View
     
     let presetFirst = EQPresetView(imageLabel: "whatButton", titleLabel: "내 목소리 울림")
-
+    
     let presetSecond = EQPresetView(imageLabel: "whatButton", titleLabel: "다른 사람 목소리 크기")
     
     let presetThird = EQPresetView(imageLabel: "whatButton", titleLabel: "다른 사람 목소리 울림")
@@ -280,7 +290,7 @@ class NewEQView: UIView {
     let presetFourth = EQPresetView(imageLabel: "whatButton", titleLabel: "날카로운 소리")
     
     lazy var presetStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [presetFirst, presetSecond, presetThird, presetFourth])
+        let stack = UIStackView(arrangedSubviews: [presetFirst, presetSecond, presetThird, presetFourth])
         stack.axis = .vertical
         return stack
     }()
@@ -292,16 +302,16 @@ class NewEQView: UIView {
     }
     
     lazy var defaultButtonView: UIView = {
-       let view = UIView()
+        let view = UIView()
         let label = UILabel()
         label.text = "기본설정으로"
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .label
         view.addSubview(defaultButton)
-
+        
         view.addSubview(label)
         
-   
+        
         
         label.snp.makeConstraints {
             $0.centerY.centerX.equalToSuperview()
@@ -324,16 +334,16 @@ class NewEQView: UIView {
     }
     
     lazy var saveButtonView: UIView = {
-       let view = UIView()
+        let view = UIView()
         let label = UILabel()
         label.text = "저장하기"
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .white
         view.addSubview(saveButton)
-
+        
         view.addSubview(label)
         view.layer.cornerRadius = 28
-
+        
         view.backgroundColor = .label
         label.snp.makeConstraints {
             $0.centerY.centerX.equalToSuperview()
@@ -346,20 +356,29 @@ class NewEQView: UIView {
     }()
     
     lazy var bottomButtonStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [defaultButtonView, saveButtonView])
+        let stack = UIStackView(arrangedSubviews: [defaultButtonView, saveButtonView])
         
         stack.spacing = 5
         stack.distribution = .fillEqually
         return stack
     }()
     
-
-
+    let retryShadowImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "recordShadowImage")
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    let eqTutorial = NewEQTutorialView()
+    
     // MARK: - Life Cycle
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
+        eqScrollView.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -386,6 +405,8 @@ class NewEQView: UIView {
         
         eqContentView.addSubview(topNaviBarView)
         topNaviBarView.snp.makeConstraints {
+            $0.height.equalTo(50)
+
             $0.top.equalToSuperview().offset(screenSize.height * 0.05)
             $0.leading.trailing.equalToSuperview()
         }
@@ -423,7 +444,7 @@ class NewEQView: UIView {
         totalSliderView.addSubview(eqSliderStackView)
         eqSliderStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-
+            
         }
         
         eqContentView.addSubview(presetFirst)
@@ -455,12 +476,55 @@ class NewEQView: UIView {
             $0.bottom.equalToSuperview().offset(-screenSize.height * 0.16)
         }
         
+        //        eqContentView.addSubview(bottomButtonStack)
+        //        bottomButtonStack.snp.makeConstraints {
+        //            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
+        //            $0.leading.trailing.equalToSuperview().inset(20)
+        //            $0.height.equalTo(56)
+        //        }
+        eqContentView.addSubview(retryShadowImage)
         eqContentView.addSubview(bottomButtonStack)
         bottomButtonStack.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
             $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-15)
+            //            if UIDevice.iPhoneSE_7_8_Series {
+            //                $0.height.equalTo(90)
+            //            } else {
+            //                $0.height.equalTo(120)
+            //            }
             $0.height.equalTo(56)
+            
         }
+        
+        retryShadowImage.snp.makeConstraints {
+            $0.bottom.equalTo(self.snp.bottom).offset(0)
+            $0.leading.equalTo(self.snp.leading).offset(0)
+            $0.trailing.equalTo(self.snp.trailing).offset(0)
+        }
+        
+        eqContentView.addSubview(eqTutorial)
+        eqTutorial.snp.makeConstraints {
+            $0.top.equalTo(self.snp.top)
+            $0.bottom.equalTo(self.snp.bottom)
 
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
+        
+        // Check if the scroll view is at the bottom
+        if contentOffsetY >= (contentHeight - scrollViewHeight) {
+            
+            retryShadowImage.isHidden = true
+        } else {
+            retryShadowImage.isHidden = false
+            
+        }
     }
 }
+
