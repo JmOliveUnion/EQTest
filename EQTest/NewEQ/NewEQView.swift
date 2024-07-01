@@ -253,7 +253,7 @@ class NewEQView: UIView, UIScrollViewDelegate {
     
     lazy var eqSliderStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [slider1, slider2, slider3, slider4, slider5, slider6, slider7, slider8, slider9])
-        //        stack.spacing = 7
+        //stack.spacing = 7
         stack.distribution = .fillEqually
         return stack
     }()
@@ -369,6 +369,8 @@ class NewEQView: UIView, UIScrollViewDelegate {
         image.contentMode = .scaleAspectFill
         return image
     }()
+    
+    // MARK: - Tutorial View
     
     let eqTutorial = NewEQTutorialView()
     
