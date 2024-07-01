@@ -32,7 +32,6 @@ class ViewController: UIViewController, VerticalSliderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        print("L")
         
     }
     
@@ -43,7 +42,6 @@ class ViewController: UIViewController, VerticalSliderDelegate {
         
         mainView.selectButton.tapPublisher
             .sink { _ in
-                print("Button Tapped")
                 let vc = NewEQDetailVC()
                 vc.modalPresentationStyle = .fullScreen
                 //                self.navigationController?.pushViewController(vc, animated: true)
@@ -55,10 +53,55 @@ class ViewController: UIViewController, VerticalSliderDelegate {
         mainView.topLeftButton.tapPublisher
             .sink { _ in
                 
-                print("Button Top Left")
                 
                 mainView.eqTutorial.isHidden = false
                 mainView.eqScrollView.isScrollEnabled = false
+            }
+            .store(in: &cancellableBag)
+        
+        
+        mainView.leftEarButton.tapPublisher
+            .sink { _ in
+                mainView.rightEarView.backgroundColor = .clear
+                mainView.rightEarView.layer.borderColor = UIColor.red.cgColor
+                mainView.rightEarView.layer.borderWidth = 1
+                mainView.rightEarLabel.textColor = .red
+                
+                mainView.leftEarView.backgroundColor = .blue
+                mainView.leftEarView.layer.borderWidth = 0
+                mainView.leftEarLabel.textColor = .white
+                
+                mainView.chainButtonImage.image = UIImage(named: "chain_inactive")
+            }
+            .store(in: &cancellableBag)
+        
+        mainView.chainEarButton.tapPublisher
+            .sink { _ in
+                mainView.leftEarView.backgroundColor = .blue
+                mainView.leftEarView.layer.borderWidth = 0
+                mainView.leftEarLabel.textColor = .white
+                
+                mainView.rightEarView.backgroundColor = .red
+                mainView.rightEarView.layer.borderWidth = 0
+                mainView.rightEarLabel.textColor = .white
+                
+                mainView.chainButtonImage.image = UIImage(named: "chain_active")
+            }
+            .store(in: &cancellableBag)
+        
+        mainView.rightEarButton.tapPublisher
+            .sink { _ in
+                mainView.leftEarView.backgroundColor = .clear
+                mainView.leftEarView.layer.borderColor = UIColor.blue.cgColor
+                mainView.leftEarView.layer.borderWidth = 1
+                mainView.leftEarLabel.textColor = .blue
+                
+                mainView.rightEarView.backgroundColor = .red
+                mainView.rightEarView.layer.borderWidth = 0
+                mainView.rightEarLabel.textColor = .white
+                
+                mainView.chainButtonImage.image = UIImage(named: "chain_inactive")
+
             }
             .store(in: &cancellableBag)
         
@@ -73,7 +116,14 @@ class ViewController: UIViewController, VerticalSliderDelegate {
         
         mainView.eqTutorial.backButton.tapPublisher
             .sink {[weak self] _ in
-                
+            
+                self?.decrementPage()
+                self?.showingView()
+            }
+            .store(in: &cancellableBag)
+        
+        mainView.eqTutorial.backButtonSecond.tapPublisher
+            .sink {[weak self] _ in
                 
                 self?.decrementPage()
                 self?.showingView()
@@ -87,6 +137,31 @@ class ViewController: UIViewController, VerticalSliderDelegate {
                 self?.showingView()
             }
             .store(in: &cancellableBag)
+        
+        mainView.eqTutorial.nextButtonSecond.tapPublisher
+            .sink {[weak self] _ in
+                
+                self?.incrementPage()
+                self?.showingView()
+            }
+            .store(in: &cancellableBag)
+        
+        mainView.eqTutorial.topRightXbutton.tapPublisher
+            .sink {[weak self] _ in
+                [ mainView.eqTutorial.soundControlView, mainView.eqTutorial.presetStackTutorial, mainView.eqSliderStackView, mainView.eqTutorial].forEach {
+                    $0.isHidden = true
+                }
+                
+                mainView.eqScrollView.isScrollEnabled = true
+                self?.pageNum = .pageOne
+                self?.showingView()
+                
+                [mainView.bottomButtonStack].forEach {
+                    $0.isHidden = false
+                }
+            }
+            .store(in: &cancellableBag)
+        
         
     }
     
@@ -112,26 +187,57 @@ class ViewController: UIViewController, VerticalSliderDelegate {
             return assertionFailure("MainView does not Exist")
         }
         
+        let tutorial = mainView.eqTutorial
+        
         switch self.pageNum {
         case .pageOne:
-            mainView.eqTutorial.firstNextButton.isHidden = false
-            mainView.eqTutorial.buttonStack.isHidden = true
-            mainView.eqTutorial.presetView.isHidden = false
-            mainView.eqTutorial.dotView.isHidden = false
-            mainView.eqTutorial.tutorialEQStack.isHidden = true
+            [tutorial.firstNextButton,tutorial.presetView, tutorial.dotView, mainView.eqSliderStackView].forEach {
+                $0.isHidden = false
+            }
+            
+            [ tutorial.buttonStack, tutorial.tutorialEQStack, tutorial.soundRangeView, mainView.bottomButtonStack].forEach {
+                $0.isHidden = true
+            }
+        
 
 
         case .pageTwo:
-            mainView.eqTutorial.firstNextButton.isHidden = true
-            mainView.eqTutorial.buttonStack.isHidden = false
-            mainView.eqTutorial.presetView.isHidden = true
-            mainView.eqTutorial.dotView.isHidden = true
-            mainView.eqTutorial.tutorialEQStack.isHidden = false
+            
+            [ tutorial.buttonStack, tutorial.tutorialEQStack, tutorial.soundRangeView, tutorial.buttonStack].forEach {
+                $0.isHidden = false
+            }
+            
+            [ tutorial.firstNextButton, tutorial.presetView, tutorial.dotView, tutorial.presetStackTutorial, tutorial.soundControlView, mainView.eqSliderStackView].forEach {
+                $0.isHidden = true
+            }
+          
 
+        case .pageThree:
+            [ tutorial.soundControlView, tutorial.presetStackTutorial, mainView.eqSliderStackView].forEach {
+                $0.isHidden = false
+            }
             
-        default:
-            print("asdfsf")
+            [ tutorial.tutorialEQStack, tutorial.soundRangeView, tutorial.buttonStack].forEach {
+                $0.isHidden = true
+            }
             
+
+
+        case .pageFour:
+            [ tutorial.soundControlView, tutorial.presetStackTutorial, mainView.eqSliderStackView, mainView.eqTutorial].forEach {
+                $0.isHidden = true
+            }
+            
+       
+         
+            mainView.eqScrollView.isScrollEnabled = true
+            pageNum = .pageOne
+            showingView()
+            
+            [mainView.bottomButtonStack].forEach {
+                $0.isHidden = false
+            }
+
         }
     }
     

@@ -15,12 +15,14 @@ enum EQTutotroialPage: Int {
     case pageOne = 1
     case pageTwo = 2
     case pageThree = 3
+    case pageFour = 4
 
 }
 
 final class NewEQTutorialView: UIView {
     
- 
+    let screenSize: CGRect = UIScreen.main.bounds
+
     
     let topRightXbutton = UIButton().then {
         $0.setImage(UIImage(named: "whatButton"), for: .normal)
@@ -245,6 +247,208 @@ final class NewEQTutorialView: UIView {
         return stack
     }()
     
+    let soundRangeView: UIView = {
+       let view = UIView()
+        let label = UILabel()
+        label.text = "저음범위 (250 ~ 500Hz)"
+        label.font = .boldSystemFont(ofSize: 18)
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(20)
+        }
+        
+        let description = UILabel()
+        description.text = "소음이 많이 들릴 경우 조절해보세요."
+        description.textColor = .lightGray
+        description.font = .systemFont(ofSize: 16)
+        description.numberOfLines = 1
+        view.addSubview(description)
+        description.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(label.snp.bottom).offset(10)
+        }
+        
+        let label2 = UILabel()
+        label2.text = "중음범위 (1K ~ 4KHz)"
+        label2.font = .boldSystemFont(ofSize: 18)
+        view.addSubview(label2)
+        label2.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalTo(description.snp.bottom).offset(20)
+        }
+        
+        let description2 = UILabel()
+        description2.text = "소음이 많이 들릴 경우 조절해보세요."
+        description2.textColor = .lightGray
+        description2.font = .systemFont(ofSize: 16)
+        description2.numberOfLines = 1
+        view.addSubview(description2)
+        description2.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(label2.snp.bottom).offset(10)
+        }
+        
+        let label3 = UILabel()
+        label3.text = "고음범위 (6K ~ 8KHz)"
+        label3.font = .boldSystemFont(ofSize: 18)
+        view.addSubview(label3)
+        label3.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalTo(description2.snp.bottom).offset(20)
+        }
+        
+        let description3 = UILabel()
+        description3.text = "높고 깨지는 듯한 소리가 들릴 경우 조절해보세요."
+        description3.textColor = .lightGray
+        description3.font = .systemFont(ofSize: 16)
+        description3.numberOfLines = 1
+        view.addSubview(description3)
+        description3.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(label3.snp.bottom).offset(10)
+        }
+        
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        return view
+    }()
+    
+    
+    // MARK: - Third Tutorial
+    
+    let soundControlView: UIView = {
+       let view = UIView()
+        let label = UILabel()
+        label.text = "소리 조절하기"
+        label.font = .boldSystemFont(ofSize: 18)
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(20)
+        }
+        
+        let description = UILabel()
+        description.text = "내 목소리, 다른사람 목소리와 같이 원하는 소리를 키우고 줄일 수 있습니다. 자유롭게 조절해보세요."
+        description.textColor = .lightGray
+        description.font = .systemFont(ofSize: 16)
+        description.numberOfLines = 0
+        view.addSubview(description)
+        description.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(label.snp.bottom).offset(10)
+        }
+        
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        
+        return view
+    }()
+    
+    lazy var presetFirstTutorial = EQPresetView(imageLabel: "whatButton", titleLabel: "내 목소리 울림").then {
+        $0.backgroundColor = .white
+        $0.snp.makeConstraints {
+            $0.height.equalTo(screenSize.height * 0.18)
+            
+        }
+    }
+    
+    lazy var presetSecondTutorial = EQPresetView(imageLabel: "whatButton", titleLabel: "다른 사람 목소리 크기").then {
+        $0.backgroundColor = .white
+
+        $0.snp.makeConstraints {
+            $0.height.equalTo(screenSize.height * 0.18)
+        }
+    }
+    
+
+    
+    lazy var tutorialThirdBottomView = UIView().then {
+        $0.addSubview(presetStackTutorial)
+        $0.backgroundColor = .systemBackground
+    }
+    
+    let backButtonSecond: UIButton = {
+       let button = UIButton()
+        button.setTitle("이전", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20)
+        button.setTitleColor(.systemBackground, for: .normal)
+//        button.setBackgroundColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.snp.makeConstraints {
+            $0.height.equalTo(60)
+        }
+//        button.layer.borderColor = UIColor.l_keyBlue600.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 30
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let nextButtonSecond: UIButton = {
+       let button = UIButton()
+        button.setTitle("닫기", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20)
+        button.setTitleColor(.label, for: .normal)
+//        button.setBackgroundColor(.l_keyBlue600, for: .normal)
+        button.backgroundColor = .white
+
+        button.snp.makeConstraints {
+            $0.height.equalTo(60)
+        }
+        button.layer.cornerRadius = 30
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var buttonStackSecond: UIStackView = {
+     let stack = UIStackView(arrangedSubviews: [backButtonSecond, nextButtonSecond])
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
+
+    
+    lazy var presetStackTutorial: UIView = {
+        let view = UIView()
+        
+        view.addSubview(presetFirstTutorial)
+        view.addSubview(presetSecondTutorial)
+        
+        presetFirstTutorial.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(screenSize.height * 0.18)
+
+        }
+        
+        presetSecondTutorial.snp.makeConstraints {
+            $0.top.equalTo(presetFirstTutorial.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(screenSize.height * 0.18)
+
+        }
+        
+        view.addSubview(buttonStackSecond)
+        buttonStackSecond.snp.makeConstraints {
+//            $0.top.equalTo(presetSecondTutorial.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().offset(-36)
+        }
+        
+        view.isHidden = true
+        view.backgroundColor = .systemBackground
+        
+        return view
+        
+        
+    }()
+    
     
     // MARK: - Bottom Button
     let firstNextButton: UIButton = {
@@ -307,6 +511,8 @@ final class NewEQTutorialView: UIView {
     }()
     
     
+    
+    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
@@ -322,7 +528,6 @@ final class NewEQTutorialView: UIView {
     // MARK: - View Set Up
     
     private func setUp() {
-        let screenSize: CGRect = UIScreen.main.bounds
 
         self.backgroundColor = .black.withAlphaComponent(0.8)
         
@@ -348,9 +553,34 @@ final class NewEQTutorialView: UIView {
         
         addSubview(tutorialEQStack)
         tutorialEQStack.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalTo(screenSize.height * 0.3)
             $0.leading.trailing.equalToSuperview().inset(15)
-            $0.height.equalTo(screenSize.height * 0.3)
+            $0.height.equalTo(screenSize.height * 0.25)
+        }
+        
+        addSubview(soundRangeView)
+        soundRangeView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(tutorialEQStack.snp.bottom).offset(20)
+            $0.height.equalTo(screenSize.height * 0.25)
+        }
+        
+ 
+        
+        addSubview(presetStackTutorial)
+        presetStackTutorial.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(screenSize.height * 0.5)
+//            $0.top.greaterThanOrEqualTo(soundControlView.snp.bottom).offset(20)
+            $0.bottom.equalToSuperview()
+        }
+        
+        addSubview(soundControlView)
+        soundControlView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.height.equalTo(110)
+            $0.bottom.equalTo(presetStackTutorial.snp.top).offset(-20)
+
         }
         
         addSubview(firstNextButton)

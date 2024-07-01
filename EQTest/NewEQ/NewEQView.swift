@@ -142,18 +142,19 @@ class NewEQView: UIView, UIScrollViewDelegate {
         $0.backgroundColor = .clear
     }
     
+    let leftEarLabel = UILabel().then {
+        $0.text = "왼쪽"
+        $0.font = .systemFont(ofSize: 20)
+        $0.textColor = .white
+    }
+    
     lazy var leftEarView: UIView = {
         let view = UIView()
-        let label = UILabel()
         
-        label.text = "왼쪽"
-        label.font = .systemFont(ofSize: 20)
-        label.textColor = .white
-        
-        view.addSubview(label)
+        view.addSubview(leftEarLabel)
         view.addSubview(leftEarButton)
         
-        label.snp.makeConstraints {
+        leftEarLabel.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
         
@@ -176,18 +177,19 @@ class NewEQView: UIView, UIScrollViewDelegate {
         $0.backgroundColor = .clear
     }
     
+    let rightEarLabel = UILabel().then {
+        $0.text = "오른쪽"
+        $0.font = .systemFont(ofSize: 20)
+        $0.textColor = .white
+    }
+    
     lazy var rightEarView: UIView = {
         let view = UIView()
-        let label = UILabel()
-        
-        label.text = "오른쪽"
-        label.font = .systemFont(ofSize: 20)
-        label.textColor = .white
-        
-        view.addSubview(label)
+       
+        view.addSubview(rightEarLabel)
         view.addSubview(rightEarButton)
         
-        label.snp.makeConstraints {
+        rightEarLabel.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
         
@@ -206,15 +208,26 @@ class NewEQView: UIView, UIScrollViewDelegate {
         return view
     }()
     
+    let chainEarButton = UIButton().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let chainButtonImage = UIImageView().then {
+        $0.image = UIImage(named: "chain_active")
+        $0.contentMode = .scaleAspectFit
+    }
+    
     lazy var chaingView: UIView = {
         let view = UIView()
-        let image = UIImageView()
-        image.image = UIImage(named: "chain_active")
-        image.contentMode = .scaleAspectFit
         
-        view.addSubview(image)
-        image.snp.makeConstraints {
+        view.addSubview(chainButtonImage)
+        chainButtonImage.snp.makeConstraints {
             $0.centerY.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(chainEarButton)
+        chainEarButton.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         view.backgroundColor = .gray
         view.snp.makeConstraints {
